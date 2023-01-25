@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "prettier": {
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "printWidth": 110
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@types/node": "^18.11.18",
+    "prettier": "^2.8.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "mongodb": "^4.13.0"
+  }
+}

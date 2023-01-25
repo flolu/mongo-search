@@ -1,0 +1,26 @@
+version: '3'
+services:
+  api:
+    image: node:18
+    container_name: mongo_search_api
+    volumes:
+      - ./api.ts:/api.ts
+      - ./node_modules:/node_modules
+      - ./tsconfig.json:/tsconfig.json
+      - ./package.json:/package.json
+    ports:
+      - '3000:3000'
+    command: npx ts-node-dev api.ts
+    environment:
+      MONGODB_HOST: mongodb:27017
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:6
+    container_name: mongo_search_mongodb
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
