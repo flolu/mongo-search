@@ -1,0 +1,11 @@
+GET http://localhost:3000/search?query=flo
+
+###
+
+GET http://localhost:3000/search?query=chaz%20kutch
+
+###
+
+GET http://localhost:3000/search?query=aaron53
+
+###

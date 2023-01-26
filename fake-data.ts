@@ -1,16 +1,10 @@
 import {config} from 'dotenv'
-import {MongoClient} from 'mongodb'
 import {faker} from '@faker-js/faker'
+import {User} from './util'
 
 config()
 
-const MONGODB_HOST = process.env.MONGODB_HOST!
-const MONGODB_USER = process.env.MONGODB_USERNAME
-const MONGODB_PASS = process.env.MONGODB_PASSWORD
-
-const mongoClient = new MongoClient(MONGODB_HOST, {
-  auth: {username: MONGODB_USER, password: MONGODB_PASS},
-})
+import {mongoClient} from './database'
 
 function createRandomUser() {
   return {
@@ -18,7 +12,6 @@ function createRandomUser() {
     fullName: faker.name.fullName(),
     email: faker.internet.email(),
     avatar: faker.image.avatar(),
-    password: faker.internet.password(),
     registeredAt: faker.date.past(),
   }
 }
@@ -26,9 +19,12 @@ function createRandomUser() {
 async function main() {
   try {
     const db = mongoClient.db('tutorial')
-    const collection = db.collection('users')
+    const collection = db.collection<User>('users')
 
-    const users = Array.from({length: 10000 - 10}).map(createRandomUser)
+    const users = Array.from({length: 10000}).map((_value, index) => {
+      faker.seed(index)
+      return createRandomUser()
+    })
 
     await collection.insertMany(users)
   } catch (err) {

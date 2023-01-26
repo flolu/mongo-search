@@ -5,14 +5,17 @@ services:
     container_name: mongo_search_api
     volumes:
       - ./api.ts:/api.ts
+      - ./util.ts:/util.ts
+      - ./database.ts:/database.ts
       - ./node_modules:/node_modules
       - ./tsconfig.json:/tsconfig.json
       - ./package.json:/package.json
     ports:
-      - '3000:3000'
+      - 3000:3000
     command: npx ts-node-dev api.ts
+    env_file: .env
     environment:
-      MONGODB_HOST: mongodb:27017
+      - MONGODB_HOST=mongodb://mongodb:27017
     depends_on:
       - mongodb
 
