@@ -11,7 +11,7 @@ services:
       - ./package.json:/package.json
     ports:
       - 3000:3000
-    command: npx ts-node-dev self-deployed-api.ts
+    command: npx ts-node self-deployed-api.ts
     env_file: .env.local
     environment:
       - MONGODB_HOST=mongodb://mongodb:27017
@@ -38,7 +38,7 @@ services:
       - ./package.json:/package.json
     ports:
       - 3001:3001
-    command: npx ts-node-dev atlas-api.ts
+    command: npx ts-node atlas-api.ts
     env_file: .env.atlas
     depends_on:
       - mongodb

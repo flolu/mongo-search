@@ -11,13 +11,13 @@
 
 - Exact match text search with self-deployed MongoDB
 - Fuzzy text search with MongoDB Atlas
+- Text autocompletion
 - Sort search results by score
 - Search through multiple text fields
 - Limit search results to specific country code
 - Populate database with fake users
 
 <!-- TODO small user interface -->
-<!-- TODO autocomplete (https://www.mongodb.com/docs/atlas/atlas-search/autocomplete/#std-label-autocomplete-ref) -->
 
 # Tech Stack
 

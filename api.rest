@@ -16,3 +16,5 @@ GET http://localhost:3001/search?query=gilbert&country=RO
 GET http://localhost:3001/search?query=gilbert%20kutch
 ###
 GET http://localhost:3001/search?query=gilber%20kutc
+###
+GET http://localhost:3001/autocomplete?query=gilb
