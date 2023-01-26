@@ -1,11 +1,14 @@
+# Self Deployed MongoDB API
 GET http://localhost:3000/search?query=flo
+###
+GET http://localhost:3000/search?query=gilbert%20kutch
+###
+GET http://localhost:3000/search?query=gilber%20kutc
 
 ###
-
-GET http://localhost:3000/search?query=chaz%20kutch
-
+# MongoDB Atlas API
+GET http://localhost:3001/search?query=flo
 ###
-
-GET http://localhost:3000/search?query=aaron53
-
+GET http://localhost:3001/search?query=gilbert%20kutch
 ###
+GET http://localhost:3001/search?query=gilber%20kutc

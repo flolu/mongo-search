@@ -17,6 +17,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongodb": "^4.13.0"
+    "mongodb": "^4.13.0",
+    "urllib": "^3.10.1"
   }
 }

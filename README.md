@@ -4,12 +4,20 @@
   </a> -->
   <br>
   <h1>MongoDB Text Search With Node.js</h1>
-  <!-- <p></p> -->
+  <p>Basic and Fuzzy Text Search With Self-Deployed MongoDB And MongoDB Atlas</p>
 </div>
 
 # Features
 
-- TODO
+- Exact match text search with self-deployed MongoDB
+- Fuzzy text search with MongoDB Atlas
+- Sort search results by score
+- Search through multiple text fields
+- Populate database with fake users
+
+<!-- TODO small user interface -->
+<!-- TODO limit search results -->
+<!-- TODO autocomplete (https://www.mongodb.com/docs/atlas/atlas-search/autocomplete/#std-label-autocomplete-ref) -->
 
 # Tech Stack
 
@@ -29,8 +37,25 @@
 
 - `npm install` (Install NPM dependencies)
 - `docker-compose -f docker-compose.yml up --build` (Start services)
-- `npx ts-node fake-data.ts` (Add fake data to MongoDB)
+
+**Self Deployed Search**
+
+- `npx ts-node fake-data.ts .env.local` (Add fake data to MongoDB)
 - `mongodb://admin:password@localhost:27017` (MongoDB Compass connection URI)
+- http://localhost:3000/search?query=flo (Basic search)
+
+**MongoDB Atlas Search**
+
+- Create [MongoDB Atlas](https://cloud.mongodb.com) cluster
+- Create API Key for your project
+  1. Go to Project Settings
+  2. Select Access Manager
+  3. Select API Keys
+  4. Create API Key
+  5. Set Project Permissions to Project Search Index Editor
+  6. Set `MONGODB_ATLAS_PUBLIC_KEY` and `MONGODB_ATLAS_PRIVATE_KEY` in `.env.atlas`
+- `npx ts-node fake-data.ts .env.atlas` (Add fake data to MongoDB)
+- http://localhost:3001/search?query=flo (Fuzzy search)
 
 **Cleanup**
 
@@ -38,5 +63,7 @@
 
 # Codebase
 
-- [`api.ts`](api.ts) (Small Node.js API to fetch search results from MongoDB)
+- [`self-deployed-api.ts`](self-deployed-api.ts) (Node.js API to fetch search results from self-deployed MongoDB)
+- [`atlas-api.ts`](atlas-api.ts) (Node.js API to fetch search results from MongoDB Atlas, which has more features)
 - [`fake-data.ts`](fake-data.ts) (Script to populate MongoDB with fake data)
+- [`util.ts`](util.ts) (Utilities for TypeScript and MongoDB)

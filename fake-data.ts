@@ -1,10 +1,10 @@
 import {config} from 'dotenv'
 import {faker} from '@faker-js/faker'
-import {User} from './util'
 
-config()
+const envFile = process.argv[process.argv.length - 1]
+config({path: envFile})
 
-import {mongoClient} from './database'
+import {mongoClient, MONGODB_COLLECTION, User} from './util'
 
 function createRandomUser() {
   return {
@@ -19,7 +19,7 @@ function createRandomUser() {
 async function main() {
   try {
     const db = mongoClient.db('tutorial')
-    const collection = db.collection<User>('users')
+    const collection = db.collection<User>(MONGODB_COLLECTION)
 
     const users = Array.from({length: 10000}).map((_value, index) => {
       faker.seed(index)

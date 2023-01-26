@@ -1,19 +1,18 @@
 version: '3'
 services:
-  api:
+  self-deployed-api:
     image: node:18
-    container_name: mongo_search_api
+    container_name: mongo_search_self_deployed_api
     volumes:
-      - ./api.ts:/api.ts
+      - ./self-deployed-api.ts:/self-deployed-api.ts
       - ./util.ts:/util.ts
-      - ./database.ts:/database.ts
       - ./node_modules:/node_modules
       - ./tsconfig.json:/tsconfig.json
       - ./package.json:/package.json
     ports:
       - 3000:3000
-    command: npx ts-node-dev api.ts
-    env_file: .env
+    command: npx ts-node-dev self-deployed-api.ts
+    env_file: .env.local
     environment:
       - MONGODB_HOST=mongodb://mongodb:27017
     depends_on:
@@ -27,3 +26,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
+
+  atlas-api:
+    image: node:18
+    container_name: mongo_search_atlas_api
+    volumes:
+      - ./atlas-api.ts:/atlas-api.ts
+      - ./util.ts:/util.ts
+      - ./node_modules:/node_modules
+      - ./tsconfig.json:/tsconfig.json
+      - ./package.json:/package.json
+    ports:
+      - 3001:3001
+    command: npx ts-node-dev atlas-api.ts
+    env_file: .env.atlas
+    depends_on:
+      - mongodb
