@@ -1,10 +1,8 @@
 <div align="center">
-  <!-- <a href="https://github.com/flolu/mongo-search">
-    <img width="100px" height="auto" src="./.github/thumbnail.png" />
-  </a> -->
   <br>
   <h1>MongoDB Text Search With Node.js</h1>
   <p>Fuzzy Text Search And Autocompletion With MongoDB And Node.js</p>
+  <img width="420px" src="./.github/preview.gif" />
 </div>
 
 # Features
