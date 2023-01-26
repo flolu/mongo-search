@@ -17,4 +17,5 @@ export interface User {
   email: string
   avatar: string
   registeredAt: Date
+  country: string
 }

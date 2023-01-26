@@ -1,5 +1,5 @@
 <div align="center">
-  <!-- <a href="https://github.com/flolu/auth">
+  <!-- <a href="https://github.com/flolu/mongo-search">
     <img width="100px" height="auto" src="./.github/thumbnail.png" />
   </a> -->
   <br>
@@ -13,10 +13,10 @@
 - Fuzzy text search with MongoDB Atlas
 - Sort search results by score
 - Search through multiple text fields
+- Limit search results to specific country code
 - Populate database with fake users
 
 <!-- TODO small user interface -->
-<!-- TODO limit search results -->
 <!-- TODO autocomplete (https://www.mongodb.com/docs/atlas/atlas-search/autocomplete/#std-label-autocomplete-ref) -->
 
 # Tech Stack
@@ -26,6 +26,7 @@
 - [Docker](https://www.docker.com)
 - [MongoDB](https://mongodb.com)
 - [MongoDB Compass](https://www.mongodb.com/de-de/products/compass)
+- [MongoDB Atlas](https://www.mongodb.com/atlas/database)
 
 # Usage
 
@@ -42,7 +43,7 @@
 
 - `npx ts-node fake-data.ts .env.local` (Add fake data to MongoDB)
 - `mongodb://admin:password@localhost:27017` (MongoDB Compass connection URI)
-- http://localhost:3000/search?query=flo (Basic search)
+- http://localhost:3000/search?query=gilbert (Basic search)
 
 **MongoDB Atlas Search**
 
@@ -55,7 +56,7 @@
   5. Set Project Permissions to Project Search Index Editor
   6. Set `MONGODB_ATLAS_PUBLIC_KEY` and `MONGODB_ATLAS_PRIVATE_KEY` in `.env.atlas`
 - `npx ts-node fake-data.ts .env.atlas` (Add fake data to MongoDB)
-- http://localhost:3001/search?query=flo (Fuzzy search)
+- http://localhost:3001/search?query=gilbert (Fuzzy search)
 
 **Cleanup**
 

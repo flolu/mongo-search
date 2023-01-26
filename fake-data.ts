@@ -13,6 +13,7 @@ function createRandomUser() {
     email: faker.internet.email(),
     avatar: faker.image.avatar(),
     registeredAt: faker.date.past(),
+    country: faker.address.countryCode()
   }
 }
 

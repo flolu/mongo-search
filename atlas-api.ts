@@ -17,41 +17,64 @@ const app = express()
 
 app.get('/search', async (req, res) => {
   const searchQuery = req.query.query as string
+  const country = req.query.country as string
 
   const db = mongoClient.db('tutorial')
   const collection = db.collection<User>(MONGODB_COLLECTION)
 
-  const result = await collection
-    .aggregate([
-      {
-        $search: {
-          index: USER_SEARCH_INDEX_NAME,
-          text: {
-            query: searchQuery,
-            path: {
-              wildcard: '*',
+  const pipeline = []
+
+  if (country) {
+    pipeline.push({
+      $search: {
+        index: USER_SEARCH_INDEX_NAME,
+        compound: {
+          must: [
+            {
+              text: {
+                query: searchQuery,
+                path: {wildcard: '*'},
+                fuzzy: {},
+              },
             },
-            fuzzy: {},
-          },
+            {
+              text: {
+                query: country,
+                path: 'country',
+              },
+            },
+          ],
         },
       },
-      {
-        $project: {
-          _id: 0,
-          score: {$meta: 'searchScore'},
-          userId: 1,
-          fullName: 1,
-          email: 1,
-          avatar: 1,
-          registeredAt: 1,
+    })
+  } else {
+    pipeline.push({
+      $search: {
+        index: USER_SEARCH_INDEX_NAME,
+        text: {
+          query: searchQuery,
+          path: {wildcard: '*'},
+          fuzzy: {},
         },
       },
-    ])
-    .sort({score: -1})
-    .limit(10)
+    })
+  }
 
+  pipeline.push({
+    $project: {
+      _id: 0,
+      score: {$meta: 'searchScore'},
+      userId: 1,
+      fullName: 1,
+      email: 1,
+      avatar: 1,
+      registeredAt: 1,
+      country: 1,
+    },
+  })
+
+  const result = await collection.aggregate(pipeline).sort({score: -1}).limit(10)
   const array = await result.toArray()
-
   res.json(array)
 })
 
@@ -90,7 +113,7 @@ async function main() {
     await mongoClient.connect()
     await upsertSearchIndex()
 
-    app.listen(3001, () => console.log('http://localhost:3001/search?query=flo'))
+    app.listen(3001, () => console.log('http://localhost:3001/search?query=gilbert'))
   } catch (err) {
     console.log(err)
   }
