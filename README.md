@@ -58,7 +58,7 @@
 **User interface**
 
 - `cd client && npm install` (Install NPM dependencies for client)
-- `cd client && npm run dev` (Start user interface in development mode)
+- `cd client && npm run dev` (Start user interface in development mode, http://localhost:4000)
 
 **Cleanup**
 

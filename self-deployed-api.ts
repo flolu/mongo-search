@@ -1,13 +1,21 @@
 import express from 'express'
 import {Filter} from 'mongodb'
+import cors from 'cors'
 import {mongoClient, MONGODB_COLLECTION} from './util'
 import {User} from './util'
 
 const app = express()
 
+app.use(cors({credentials: true, origin: 'http://localhost:4000'}))
+
 app.get('/search', async (req, res) => {
   const searchQuery = req.query.query as string
   const country = req.query.country as string
+
+  if (!searchQuery || searchQuery.length < 2) {
+    res.json([])
+    return
+  }
 
   const db = mongoClient.db('tutorial')
   const collection = db.collection<User>(MONGODB_COLLECTION)
