@@ -17,6 +17,7 @@
 - [TypeScript](https://www.typescriptlang.org)
 - [Docker](https://www.docker.com)
 - [MongoDB](https://mongodb.com)
+- [MongoDB Compass](https://www.mongodb.com/de-de/products/compass)
 
 # Usage
 
@@ -27,11 +28,13 @@
 **Setup**
 
 - `npm install` (Install NPM dependencies)
-- `docker-compose -f docker-compose.yaml up --build` (Start services)
+- `docker-compose -f docker-compose.yml up --build` (Start services)
+- `npx ts-node fake-data.ts` (Add fake data to MongoDB)
+- `mongodb://admin:password@localhost:27017` (MongoDB Compass connection URI)
 
 **Cleanup**
 
-- `docker-compose -f docker-compose.yaml rm -s -f -v` (Stop and remove Docker containers)
+- `docker-compose -f docker-compose.yml rm -s -f -v` (Stop and remove Docker containers)
 
 # Codebase
 
