@@ -32,10 +32,10 @@
 **Setup**
 
 - `npm install` (Install NPM dependencies for server)
-- `docker-compose -f docker-compose.yml up --build` (Start services)
 
 **Self Deployed Search**
 
+- `docker-compose -f docker-compose.yml up --build` (Start services)
 - `npx ts-node fake-data.ts .env.local` (Add fake data to MongoDB)
 - `mongodb://admin:password@localhost:27017` (MongoDB Compass connection URI)
 - http://localhost:3000/search?query=gilbert (Basic search)
@@ -43,6 +43,7 @@
 **MongoDB Atlas Search**
 
 - Create [MongoDB Atlas](https://cloud.mongodb.com) cluster
+- Create a user with password and set `MONGODB_USERNAME` and `MONGODB_PASSWORD` in `.env.atlas`
 - Create API Key for your project
   1. Go to Project Settings
   2. Select Access Manager
@@ -50,6 +51,7 @@
   4. Create API Key
   5. Set Project Permissions to Project Search Index Editor
   6. Set `MONGODB_ATLAS_PUBLIC_KEY` and `MONGODB_ATLAS_PRIVATE_KEY` in `.env.atlas`
+- `docker-compose -f docker-compose.yml up --build` (Start services)
 - `npx ts-node fake-data.ts .env.atlas` (Add fake data to MongoDB)
 - http://localhost:3001/search?query=gilbert (Fuzzy search)
 
