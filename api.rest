@@ -1,26 +1,24 @@
 # Self Deployed MongoDB API
 ### search for gilbert
 GET http://localhost:3000/search?query=gilbert
+### gilbert or kutch
+GET http://localhost:3000/search?query=gilbert%20murphy
+### exclude kutch
+GET http://localhost:3000/search?query=gilbert%20-murphy
+### self-deployed is not fuzzy!
+GET http://localhost:3000/search?query=gilber%20murph
 ### gilbart and country=RO
 GET http://localhost:3000/search?query=gilbert&country=RO
-### gilbert or kutch
-GET http://localhost:3000/search?query=gilbert%20kutch
-### exclude kutch
-GET http://localhost:3000/search?query=gilbert%20-kutch
-### self-deployed is not fuzzy!
-GET http://localhost:3000/search?query=gilber%20kutc
 ###
 
 # MongoDB Atlas API
 ### search for gilbert
 GET http://localhost:3001/search?query=gilbert
+### gilbert or kutch
+GET http://localhost:3001/search?query=gilbert%20murphy
+### fuzzy search works on atlas
+GET http://localhost:3001/search?query=gilber%20murph
 ### gilbart and country=RO
 GET http://localhost:3001/search?query=gilbert&country=RO
-### gilbert or kutch
-GET http://localhost:3001/search?query=gilbert%20kutch
-### exclude kutch
-GET http://localhost:3000/search?query=gilbert%20-kutch
-### fuzzy search works on atlas
-GET http://localhost:3001/search?query=gilber%20kutc
 ### autocomplete
-GET http://localhost:3001/autocomplete?query=gilb
+GET http://localhost:3001/autocomplete?query=gil

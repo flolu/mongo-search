@@ -4,7 +4,7 @@ import {faker} from '@faker-js/faker'
 const envFile = process.argv[process.argv.length - 1]
 config({path: envFile})
 
-import {mongoClient, MONGODB_COLLECTION, User} from './util'
+import {mongoClient, MONGODB_COLLECTION, MONGODB_DATABASE, User} from './util'
 
 function createRandomUser() {
   return {
@@ -13,13 +13,13 @@ function createRandomUser() {
     email: faker.internet.email(),
     avatar: faker.image.avatar(),
     registeredAt: faker.date.past(),
-    country: faker.address.countryCode()
+    country: faker.address.countryCode(),
   }
 }
 
 async function main() {
   try {
-    const db = mongoClient.db('tutorial')
+    const db = mongoClient.db(MONGODB_DATABASE)
     const collection = db.collection<User>(MONGODB_COLLECTION)
 
     const users = Array.from({length: 10000}).map((_value, index) => {

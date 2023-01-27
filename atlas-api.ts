@@ -43,7 +43,7 @@ app.get('/search', async (req, res) => {
             {
               text: {
                 query: searchQuery,
-                path: {wildcard: '*'},
+                path: ['fullName', 'email'],
                 fuzzy: {},
               },
             },
@@ -63,7 +63,7 @@ app.get('/search', async (req, res) => {
         index: USER_SEARCH_INDEX_NAME,
         text: {
           query: searchQuery,
-          path: {wildcard: '*'},
+          path: ['fullName', 'email'],
           fuzzy: {},
         },
       },
@@ -171,9 +171,9 @@ async function upsertSearchIndex() {
   if (!userSearchIndex) {
     await request(ATLAS_SEARCH_INDEX_API_URL, {
       data: {
+        name: USER_SEARCH_INDEX_NAME,
         database: MONGODB_DATABASE,
         collectionName: MONGODB_COLLECTION,
-        name: USER_SEARCH_INDEX_NAME,
         // https://www.mongodb.com/docs/atlas/atlas-search/index-definitions/#syntax
         mappings: {
           dynamic: true,
@@ -192,9 +192,9 @@ async function upsertAutocompleteIndex() {
   if (!userAutocompleteIndex) {
     await request(ATLAS_SEARCH_INDEX_API_URL, {
       data: {
+        name: USER_AUTOCOMPLETE_INDEX_NAME,
         database: MONGODB_DATABASE,
         collectionName: MONGODB_COLLECTION,
-        name: USER_AUTOCOMPLETE_INDEX_NAME,
         // https://www.mongodb.com/docs/atlas/atlas-search/autocomplete/#index-definition
         mappings: {
           dynamic: false,
